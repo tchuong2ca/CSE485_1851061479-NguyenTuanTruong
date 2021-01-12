@@ -1,31 +1,40 @@
+<?php
+if(!empty($_GET['user_id'])){
+  error_reporting(0);
+$get_user = mysqli_fetch_assoc($mysqli->query("select * from registration where email = '".$_GET['user_id']."'"));
+$profile = mysqli_fetch_assoc($mysqli->query("select * from profile where a_id = '".$get_user['email']."'"));
+$details = mysqli_fetch_assoc($mysqli->query("select * from details where a_id = '".$get_user['email']."'"));
+$counterarea = mysqli_fetch_assoc($mysqli->query("select * from counterarea where a_id = '".$get_user['email']."'"));
+$services = mysqli_fetch_assoc($mysqli->query("select * from services where a_id = '".$get_user['email']."'"));
+$skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".$get_user['email']."'"));
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title></title>
-
+    <meta name="description" content="The Curriculum Vitae of Joe Bloggs."/>
+    <title><?php echo base64_decode($get_user['name']); ?> - Curriculum Vitae</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="frontend/assets/css/bootstrap.min.css" >
     <!-- Fonts -->
-    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="frontend/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="frontend/assets/fonts/font-awesome.css">
+    <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
     <!-- Icon -->
-    <link rel="stylesheet" type="text/css" href="assets/fonts/simple-line-icons.css">
+    <link rel="stylesheet" type="text/css" href="frontend/assets/fonts/simple-line-icons.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Slicknav -->
-    <link rel="stylesheet" type="text/css" href="assets/css/slicknav.css">
+    <link rel="stylesheet" type="text/css" href="frontend/assets/css/slicknav.css">
     <!-- Nivo Lightbox -->
-    <link rel="stylesheet" type="text/css" href="assets/css/nivo-lightbox.css" >
+    <link rel="stylesheet" type="text/css" href="frontend/assets/css/nivo-lightbox.css" >
     <!-- Animate -->
-    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <link rel="stylesheet" type="text/css" href="frontend/assets/css/animate.php">
     <!-- Main Style -->
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="frontend/assets/css/main.css">
     <!-- Responsive Style -->
-    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-
+    <link rel="stylesheet" type="text/css" href="frontend/assets/css/responsive.css">
   </head>
   <body>
 
@@ -41,8 +50,7 @@
               <span class="icon-menu"></span>
               <span class="icon-menu"></span>
               <span class="icon-menu"></span>
-            </button>
-           
+            </button>           
           </div>
           <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="onepage-nev navbar-nav mr-auto w-100 justify-content-end clearfix">
@@ -79,7 +87,6 @@
             </ul>
           </div>
         </div>
-
         <!-- Mobile Menu Start -->
         <ul class="onepage-nev mobile-menu">
           <li>
@@ -112,18 +119,18 @@
           <div class="row">
             <div class="col-md-12 col-sm-12 text-center">
               <div class="contents">
-                <h5 class="script-font wow fadeInUp" data-wow-delay="0.2s">Hi This is</h5>
-                <h2 class="head-title wow fadeInUp" data-wow-delay="0.4s"></h2>
-                <p class="script-font wow fadeInUp" data-wow-delay="0.6s">Front-end Web Developer </p>
+                <h5 class="script-font wow fadeInUp" data-wow-delay="0.2s"><?php echo base64_decode($details['greeting']); ?></h5>
+                <h2 class="head-title wow fadeInUp" data-wow-delay="0.4s"><?php echo base64_decode($get_user['name']); ?></h2>
+                <p class="script-font wow fadeInUp" data-wow-delay="0.6s"><?php echo base64_decode($profile['job_title']); ?></p>
                 <ul class="social-icon wow fadeInUp" data-wow-delay="0.8s">
                   <li>
-                    <a class="facebook" href="#"><i class="icon-social-facebook"></i></a>
+                    <a class="facebook" href="https://www.facebook.com/kimtiem.kim/"><i class="icon-social-facebook"></i></a>
                   </li>
                   <li>
-                    <a class="twitter" href="#"><i class="icon-social-twitter"></i></a>
+                    <a class="twitter" href=""><i class="icon-social-twitter"></i></a>
                   </li>
                   <li>
-                    <a class="instagram" href="#"><i class="icon-social-instagram"></i></a>
+                    <a class="instagram" href="instagram.com/q_u_a_c/"><i class="icon-social-instagram"></i></a>
                   </li>
                   <li>
                     <a class="linkedin" href="#"><i class="icon-social-linkedin"></i></a>
@@ -141,7 +148,6 @@
         </div>
       </div>
       <!-- Hero Area End -->
-
     </header>
     <!-- Header Area wrapper End -->
 
@@ -151,30 +157,35 @@
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="img-thumb wow fadeInLeft" data-wow-delay="0.3s">
-              <img class="img-fluid" src="assets/img/about/alo.jpg" alt="">
+              
+            <!-- <img class="img-fluid" src="assets/img/about/about-1.jpg" alt=""> -->
+
+              <?php if(!empty($profile['image'])){ ?>
+				<img style="height: 450px; width:450px;" src="<?php echo base64_decode($profile['image']); ?>" alt="<?php echo base64_decode($get_user['name']); ?>" />
+			<?php }else{ ?>
+				<img src="img/headshot.jpg" alt="<?php echo base64_decode($get_user['name']); ?>" />
+			<?php } ?>
             </div>
           </div> 
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="profile-wrapper wow fadeInRight" data-wow-delay="0.3s">
               <h3>Hi Guys!</h3>
-              <p>bnsdjgsjd.</p>
+              <p><?php echo base64_decode($details['intro']); ?></p>
               <div class="about-profile">
-                <ul class="admin-profile">
-                  <li><span class="pro-title"> Name </span> <span class="pro-detail">Đặng Tuấn Hiệp</span></li>
-                  <li><span class="pro-title"> Age </span> <span class="pro-detail">20</span></li>
-                  <li><span class="pro-title"> Experience </span> <span class="pro-detail">0 Year</span></li>
-                  <li><span class="pro-title"> Country </span> <span class="pro-detail">VietNam</span></li>
-                  <li><span class="pro-title"> Location </span> <span class="pro-detail">Ninh Binh</span></li>
-                  <li><span class="pro-title"> e-mail </span> <span class="pro-detail">dragon16062000@gmail.com</span></li>
-                  <li><span class="pro-title"> Phone </span> <span class="pro-detail">0 123 456 789</span></li>
-                  <li><span class="pro-title"> Freelance </span> <span class="pro-detail">Available</span></li>
+                <ul class="admin-profile">    
+                  <li><span class="pro-title"> Name </span> <span class="pro-detail"><?php echo base64_decode($get_user['name']); ?></span></li>
+                  <li><span class="pro-title"> Age </span> <span class="pro-detail"><?php echo ($details['age']); ?></span></li>
+                  <li><span class="pro-title"> Experience </span> <span class="pro-detail"><?php echo ($details['exp']); ?></span> years</li>
+                  <li><span class="pro-title"> Address </span> <span class="pro-detail"><?php echo base64_decode($profile['address']); ?></span></li>
+                  <li><span class="pro-title"> e-mail </span> <a href="mailto: <?php echo base64_decode($get_user['email']); ?>">
+                  <?php echo base64_decode($get_user['email']); ?></a></li>
+                  <li><span class="pro-title"> Phone </span> <a href="tel: <?php echo base64_decode($profile['mobile']); ?>"><?php echo base64_decode($profile['mobile']); ?></a></li>
+                  <li><span class="pro-title"> Freelance </span> <span class="pro-detail"><?php echo base64_decode($details['freelance']); ?></span></li>
                 </ul>
               </div>
-              <a class="btn btn-common" href="assets/img/about/about-1.jpg" download>
+              <a class="btn btn-common" href="img/CV-NTT.jpg" download>
                 <i class="icon-paper-clip"></i> Download Resume
-                
-              </a>
-              
+              </a>              
               <a href="#CONTACT" class="btn btn-danger"><i class="icon-speech"></i> Contact Me</a>
             </div>
           </div>   
@@ -186,10 +197,26 @@
     <!-- Services Section Start -->
     <section id="services" class="services section-padding">
       <h2 class="section-title wow flipInX" data-wow-delay="0.4s">What I do</h2>
-      <div class="container">
-        <div class="row">
+      <div class="row">
+        <div class="container">
           <!-- Services item -->
-          
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            
+            <ul>              
+                  <?php
+				           $scan = $mysqli->query("select * from services where a_id = '".$get_user['email']."'");
+                   while($ser_row = mysqli_fetch_assoc($scan)){
+			              ?>
+                  <li class="col-md-6 col-lg-3 col-xs-12 services-item wow fadeInDown" data-wow-delay="0.6s" >  
+                  <div class="icon"><i class="icon-puzzle"></i></div>
+                    <article  class="content-text">                    
+					            <h3 ><?php echo base64_decode($ser_row['service']); ?></h3>				            	
+				            	<p style="padding-bottom: 15px;"><?php echo base64_decode($ser_row['description']); ?></p>
+                    </article>
+                  </li>
+                        <?php } ?>                                
+              </ul>          
+          </div>   
         </div>
       </div>
     </section>
@@ -201,14 +228,25 @@
       <div class="container">
                      <!-- Skills
 ----------------------------------------------- -->
+<style>
+.skillbar {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  height: 15px;
+  border-radius: 10px 0 0 10px;
+  overflow: hidden;
+  background-color: #f56982;
+  background-size: 100%;
+  background-image: linear-gradient(to bottom, #1cdf9e, #67fa06);
+}
+</style>
 <div class="row skill">
-
   <div class="three columns header-col">
-   
   </div>
   <br>
   <div class="nine columns main-col">
-    <span style="font-size: 20px;"><i class="icon-settings"></i> Skills</span><br>
+    <span style="font-size: 20px; padding-left:20px;"><i class="icon-settings"></i> Skills</span><br>
     <style>
         h4, p, h3 , em{
               font-size: medium;
@@ -219,26 +257,99 @@
         }
     </style>
     <br>
-    <DIV style="width:800px; min-width: 300px;">
-      <div> <h4>CSS 40%</h4>
-      <div class="css"><span style="width:40%"></span></div><br></div>
-     <div> <h4>C++ 50%</h4>
-    <div class="cplus"><span style="width:50%"></span></div><br></div>   
-       <div><h4>HTML5 60%</h4>
-    <div class="html5"><span style="width:60%"></span></div><br></div>       
-   <div> <h4>C# 50%</h4>
-    <div class="csharp"><span style="width:50%"></span></div></div></DIV>
-    
-  
-    </div> <!-- main-col end -->
+    <ul>
+    <?php
+				           $skil = $mysqli->query("select * from skill where a_id = '".$get_user['email']."'");
+                   while($ski_row = mysqli_fetch_assoc($skil)){
+                    ?>
+                    <li>
+                    <div  style="width:750px; padding-left:20px;">
+        
+         <h4><?php echo base64_decode($ski_row['content']); ?> &ensp; <?php echo ($ski_row['percentage']); ?>%</h4>
+        <div class="<?php echo base64_decode($ski_row['content']); ?>"><span class = "skillbar" style="width:<?php echo ($ski_row['percentage']); ?>%"></span></div>    
+        </div>
+                    </li>
+   
+        <?php } ?>
+    </ul>
+</div> <!-- main-col end -->
   
   </div> <!-- End skills -->
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6">
           
             <div class="education wow fadeInRight" data-wow-delay="0.3s">
+              <ul  class="timeline">
+                <li>
+                  <i class="icon-graduation"></i>
+                  <h2 class="timeline-title">EDUCATION</h2>
+                </li>
+                <ul>
+                  <?php
+				$query = $mysqli->query("select * from content where type = 'Education' and a_id = '".$get_user['email']."'");
+				while($row = mysqli_fetch_assoc($query)){
+			?>
+				<li ><article  class="content-text">
+					<h3 ><?php echo base64_decode($row['content_one']); ?></h3>
+					<span class="subDetails" ><?php echo base64_decode($row['content_two']); ?></span>
+					<p style="padding-bottom: 15px;"><?php echo base64_decode($row['content_three']); ?></p>
+        </article></li>
+      <?php } ?>
+        </ul>                
+              </ul>
+            </div>
+          </div>          
+          <!-- Experience -->
+
+          <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="experience wow fadeInRight" data-wow-delay="0.6s">
               <ul class="timeline">
-                
+                <li>
+                  <i class="icon-briefcase"></i>
+                  <h2 class="timeline-title">Experience</h2>
+                </li>
+                    <ul>
+                  <?php
+				$query = $mysqli->query("select * from content where type = 'Work Experience' and a_id = '".$get_user['email']."'");
+				while($row = mysqli_fetch_assoc($query)){
+			?>
+				<li><article class="content-text">
+					<h3 ><?php echo base64_decode($row['content_one']); ?></h3>
+					<span class="subDetails" ><?php echo base64_decode($row['content_two']); ?></span>
+					<p style="padding-bottom: 15px;"><?php echo base64_decode($row['content_three']); ?></p>
+        </article></li>
+      <?php } ?>
+        </ul>                      
+      </ul>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </div>
+    <!-- Resume Section End -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolios" class="section-padding">
+      <!-- Container Starts -->
+      <div class="container">        
+        <h2 class="section-title wow flipInX" data-wow-delay="0.4s">My Remarkable Works</h2>
+        <div class="row">          
+          <div class="col-md-12">
+            <!-- Portfolio Controller/Buttons -->
+            <div class="controls text-center">
+              <a class="filter active btn btn-common" data-filter="all">
+                All 
+              </a>
+              <a class="filter btn btn-common" data-filter=".design">
+                Design 
+              </a>
+              <a class="filter btn btn-common" data-filter=".development">
+                Development
+              </a>
+              <a class="filter btn btn-common" data-filter=".print">
+                Print 
+              </a>
+            </div>
             <!-- Portfolio Controller/Buttons Ends-->
           </div>
 
@@ -247,10 +358,10 @@
             <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 mix development print">
               <div class="portfolio-item">
                 <div class="shot-item">
-                  <img src="assets/img/gallery/img-1.jpg" alt="" />  
+                  <img src="frontend/assets/img/gallery/img-1.jpg" alt="" />  
                   <div class="overlay">
                     <div class="icons">
-                      <a class="lightbox preview" href="assets/img/gallery/img-1.jpg">
+                      <a class="lightbox preview" href="frontend/assets/img/gallery/img-1.jpg">
                         <i class="icon-eye"></i>
                       </a>
                       <a class="link" href="#">
@@ -264,10 +375,10 @@
             <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 mix design print">
               <div class="portfolio-item">
                 <div class="shot-item">
-                  <img src="assets/img/gallery/img-2.jpg" alt=""/> 
+                  <img src="frontend/assets/img/gallery/img-2.jpg" alt=""/> 
                   <div class="overlay">
                     <div class="icons">
-                      <a class="lightbox preview" href="assets/img/gallery/img-2.jpg">
+                      <a class="lightbox preview" href="frontend/assets/img/gallery/img-2.jpg">
                         <i class="icon-eye"></i>
                       </a>
                       <a class="link" href="#">
@@ -281,10 +392,10 @@
             <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 mix development">
               <div class="portfolio-item">
                 <div class="shot-item">
-                  <img src="assets/img/gallery/img-3.jpg" alt=""/> 
+                  <img src="frontend/assets/img/gallery/img-3.jpg" alt=""/> 
                   <div class="overlay">
                     <div class="icons">
-                      <a class="lightbox preview" href="assets/img/gallery/img-3.jpg">
+                      <a class="lightbox preview" href="frontend/assets/img/gallery/img-3.jpg">
                         <i class="icon-eye"></i>
                       </a>
                       <a class="link" href="#">
@@ -298,10 +409,10 @@
             <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 mix development design">
               <div class="portfolio-item">
                 <div class="shot-item">
-                  <img src="assets/img/gallery/img-4.jpg" alt="" /> 
+                  <img src="frontend/assets/img/gallery/img-4.jpg" alt="" /> 
                   <div class="overlay">
                     <div class="icons">
-                      <a class="lightbox preview" href="assets/img/gallery/img-4.jpg">
+                      <a class="lightbox preview" href="frontend/assets/img/gallery/img-4.jpg">
                         <i class="icon-eye"></i>
                       </a>
                       <a class="link" href="#">
@@ -315,10 +426,10 @@
             <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 mix development">
               <div class="portfolio-item">
                 <div class="shot-item">
-                  <img src="assets/img/gallery/img-5.jpg" alt="" /> 
+                  <img src="frontend/assets/img/gallery/img-5.jpg" alt="" /> 
                   <div class="overlay">
                     <div class="icons">
-                      <a class="lightbox preview" href="assets/img/gallery/img-5.jpg">
+                      <a class="lightbox preview" href="frontend/assets/img/gallery/img-5.jpg">
                         <i class="icon-eye"></i>
                       </a>
                       <a class="link" href="#">
@@ -332,10 +443,10 @@
             <div class="col-sm-6 col-md-4 col-lg-4 col-xl-4 mix print design">
               <div class="portfolio-item">
                 <div class="shot-item">
-                  <img src="assets/img/gallery/img-6.jpg" alt=""/>
+                  <img src="frontend/assets/img/gallery/img-6.jpg" alt=""/>
                   <div class="overlay">
                     <div class="icons">
-                      <a class="lightbox preview" href="assets/img/gallery/img-6.jpg">
+                      <a class="lightbox preview" href="frontend/assets/img/gallery/img-6.jpg">
                         <i class="icon-eye"></i>
                       </a>
                       <a class="link" href="#">
@@ -361,7 +472,7 @@
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="0.3s">
               <div class="icon"><i class="icon-briefcase"></i></div>
-              <div class="counterUp">250</div>
+              <div class="counterUp"><?php echo ($counterarea['working']); ?></div>
               <p>Project Working</p>
             </div>
           </div>
@@ -369,7 +480,7 @@
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="0.6s">
               <div class="icon"><i class="icon-check"></i></div>
-              <div class="counterUp">950</div>
+              <div class="counterUp"><?php echo ($counterarea['done']); ?></div>
               <p>Project Done</p>
             </div>
           </div>
@@ -377,7 +488,7 @@
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="0.9s">
               <div class="icon"><i class="icon-diamond"></i></div>
-              <div class="counterUp">150</div>
+              <div class="counterUp"><?php echo ($counterarea['awards']); ?></div>
               <p>Awards Received</p>
             </div>
           </div>
@@ -385,7 +496,7 @@
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="1.2s">
               <div class="icon"><i class="icon-heart"></i></div>
-              <div class="counterUp">299</div>
+              <div class="counterUp"><?php echo ($counterarea['clients']); ?></div>
               <p>Happy Clients</p>
             </div>
           </div>
@@ -403,7 +514,7 @@
                   <div class="left">
                       <h2 style="font-family: 'Dosis', sans-serif; font-size: 18px; margin-top: 20px;
                       margin-bottom: 10px; color:black">LOOKING FOR EXCLUSIVE DIGITAL SERVICES?</h2>
-                      <p></p>
+                    
                   </div>
               </div>
               <div class="col-md-3 col-md-offset-1 wow fadeInRight animated">
@@ -416,14 +527,16 @@
           </div>
       </div>
   </section>
+
   <section class="contact" id="CONTACT">
+    
       <div class="container">
           <div class="row">
               <div class="col-md-12 text-center">
                   <div class="contact_title  wow fadeInUp animated">
                       <h1>GET IN TOUCH</h1>
                       <img src="images/shape.png" alt="">
-                      <p></p>
+                     <p><?php echo base64_decode($profile['summary']); ?></p>
                   </div>
               </div>
           </div>
@@ -433,15 +546,16 @@
               <div class="col-md-3  wow fadeInLeft animated" >
                   <div class="single_contact_info">
                       <h2>Call Me</h2>
-                      <a href="tel:0852023968">085 202 3968</a>
+                      <a href="tel: <?php echo base64_decode($profile['mobile']); ?>"><?php echo base64_decode($profile['mobile']); ?></a></li>
                   </div>
                   <div class="single_contact_info">
                       <h2>Email Me</h2>
-                      <a href="mailto: nguyentuantruong2k@gmail.com" >nguyentuantruong2k@gmail.com</a>
+                      <a href="mailto: <?php echo base64_decode($get_user['email']); ?>">
+                  <?php echo base64_decode($get_user['email']); ?></a>
                   </div>
                   <div class="single_contact_info">
                       <h2>Address</h2>
-                      <p></p>
+                      <p><?php echo base64_decode($profile['address']); ?></p>
                   </div>
               </div>
               <div class="col-md-9  wow fadeInRight animated">
@@ -465,7 +579,8 @@
           <div class="row">
               <div class="col-md-12 text-center">
                   <div class="work-with   wow fadeInUp animated">
-                      <h3>looking forward to hearing from you!</h3>
+                      <h3>I'm looking forward to hearing from you!</h3>
+
                   </div>
               </div>
           </div>
@@ -481,7 +596,7 @@
             <div class="footer-text text-center wow fadeInDown" data-wow-delay="0.3s">
               <ul class="social-icon">
                 <li>
-                  <a class="facebook" href="#"><i class="icon-social-facebook"></i></a>
+                  <a class="facebook" href="https://facebook.com/kimtiem.kim"><i class="icon-social-facebook"></i></a>
                 </li>
                 <li>
                   <a class="twitter" href="#"><i class="icon-social-twitter"></i></a>
@@ -496,7 +611,7 @@
                   <a class="instagram" href="#"><i class="icon-social-google"></i></a>
                 </li>
               </ul>
-              
+            
             </div>
           </div>
         </div>
@@ -510,18 +625,30 @@
     </a>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="assets/js/jquery-min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.mixitup.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/wow.js"></script>
-    <script src="assets/js/jquery.nav.js"></script>
-    <script src="assets/js/jquery.easing.min.js"></script>  
-    <script src="assets/js/nivo-lightbox.js"></script>
-    <script src="assets/js/jquery.slicknav.js"></script>
-    <script src="assets/js/main.js"></script>
-      
+    
+    <script src="frontend/assets/js/jquery-min.js"></script>
+    <script src="frontend/assets/js/popper.min.js"></script>
+    <script src="frontend/assets/js/bootstrap.min.js"></script>
+    <script src="frontend/assets/js/jquery.mixitup.js"></script>
+    <script src="frontend/assets/js/jquery.counterup.min.js"></script>
+    <script src="frontend/assets/js/waypoints.min.js"></script>
+    <script src="frontend/assets/js/wow.js"></script>
+    <script src="frontend/assets/js/jquery.nav.js"></script>
+    <script src="frontend/assets/js/jquery.easing.min.js"></script>  
+    <script src="frontend/assets/js/nivo-lightbox.js"></script>
+    <script src="frontend/assets/js/jquery.slicknav.js"></script>
+    <script src="frontend/assets/js/main.js"></script>
+    <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3753241-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
   </body>
 </html>
+<?php
+}
+?>
