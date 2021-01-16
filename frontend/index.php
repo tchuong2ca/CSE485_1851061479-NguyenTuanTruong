@@ -4,7 +4,7 @@ if(!empty($_GET['user_id'])){
 $get_user = mysqli_fetch_assoc($mysqli->query("select * from registration where email = '".$_GET['user_id']."'"));
 $profile = mysqli_fetch_assoc($mysqli->query("select * from profile where a_id = '".$get_user['email']."'"));
 $details = mysqli_fetch_assoc($mysqli->query("select * from details where a_id = '".$get_user['email']."'"));
-$counterarea = mysqli_fetch_assoc($mysqli->query("select * from counterarea where a_id = '".$get_user['email']."'"));
+$achievements = mysqli_fetch_assoc($mysqli->query("select * from achievements where a_id = '".$get_user['email']."'"));
 $services = mysqli_fetch_assoc($mysqli->query("select * from services where a_id = '".$get_user['email']."'"));
 $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".$get_user['email']."'"));
 ?>
@@ -119,7 +119,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
           <div class="row">
             <div class="col-md-12 col-sm-12 text-center">
               <div class="contents">
-                <h5 class="script-font wow fadeInUp" data-wow-delay="0.2s"><?php echo base64_decode($details['greeting']); ?></h5>
+                <h5 class="script-font wow fadeInUp" data-wow-delay="0.2s">Hello everyone</h5>
                 <h2 class="head-title wow fadeInUp" data-wow-delay="0.4s"><?php echo base64_decode($get_user['name']); ?></h2>
                 <p class="script-font wow fadeInUp" data-wow-delay="0.6s"><?php echo base64_decode($profile['job_title']); ?></p>
                 <ul class="social-icon wow fadeInUp" data-wow-delay="0.8s">
@@ -170,7 +170,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
           <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
             <div class="profile-wrapper wow fadeInRight" data-wow-delay="0.3s">
               <h3>Hi Guys!</h3>
-              <p><?php echo base64_decode($details['intro']); ?></p>
+              <p><?php echo base64_decode($profile['summary']); ?></p>
               <div class="about-profile">
                 <ul class="admin-profile">    
                   <li><span class="pro-title"> Name </span> <span class="pro-detail"><?php echo base64_decode($get_user['name']); ?></span></li>
@@ -180,7 +180,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
                   <li><span class="pro-title"> e-mail </span> <a href="mailto: <?php echo base64_decode($get_user['email']); ?>">
                   <?php echo base64_decode($get_user['email']); ?></a></li>
                   <li><span class="pro-title"> Phone </span> <a href="tel: <?php echo base64_decode($profile['mobile']); ?>"><?php echo base64_decode($profile['mobile']); ?></a></li>
-                  <li><span class="pro-title"> Freelance </span> <span class="pro-detail"><?php echo base64_decode($details['freelance']); ?></span></li>
+                  <li><span class="pro-title"> Freelance </span> <span class="pro-detail"><?php echo ($details['freelance']); ?></span></li>
                 </ul>
               </div>
               <a class="btn btn-common" href="img/CV-NTT.jpg" download>
@@ -464,7 +464,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
     </section>
     <!-- Portfolio Section Ends --> 
 
-    <!-- Counter Area Start-->
+    <!-- Awards area Start-->
     <section class="counter-section section-padding">
       <div class="container">
         <div class="row">
@@ -472,7 +472,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="0.3s">
               <div class="icon"><i class="icon-briefcase"></i></div>
-              <div class="counterUp"><?php echo ($counterarea['working']); ?></div>
+              <div class="counterUp"><?php echo ($achievements['working']); ?></div>
               <p>Project Working</p>
             </div>
           </div>
@@ -480,7 +480,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="0.6s">
               <div class="icon"><i class="icon-check"></i></div>
-              <div class="counterUp"><?php echo ($counterarea['done']); ?></div>
+              <div class="counterUp"><?php echo ($achievements['done']); ?></div>
               <p>Project Done</p>
             </div>
           </div>
@@ -488,7 +488,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="0.9s">
               <div class="icon"><i class="icon-diamond"></i></div>
-              <div class="counterUp"><?php echo ($counterarea['awards']); ?></div>
+              <div class="counterUp"><?php echo ($achievements['awards']); ?></div>
               <p>Awards Received</p>
             </div>
           </div>
@@ -496,7 +496,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
           <div class="col-md-3 col-sm-6 work-counter-widget text-center">
             <div class="counter wow fadeInDown" data-wow-delay="1.2s">
               <div class="icon"><i class="icon-heart"></i></div>
-              <div class="counterUp"><?php echo ($counterarea['clients']); ?></div>
+              <div class="counterUp"><?php echo ($achievements['clients']); ?></div>
               <p>Happy Clients</p>
             </div>
           </div>
@@ -527,6 +527,28 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
           </div>
       </div>
   </section>
+  <?php
+    $notice = "Your contact information is saved successfully.";
+    $type = "success";
+if(isset($_POST['send']))
+{
+	
+		if($mysqli->query("insert into contact values(
+			'',
+			'".($_POST['Name'])."',
+			'".($_POST['Email'])."',
+			'".($_POST['Subject'])."',
+			'".($_POST['message'])."'
+		)")){     
+        
+         echo "<script>alert('Success!! Your contact information is saved successfully.')</script>";
+		
+		}else{
+			$wer = '<p style="color:#f00;">Something wrong! please try again.</p>';
+		}}
+		else{$wer='<p style="color:#f00;">Something wrong! please try again..</p>';}
+	
+?>
 
   <section class="contact" id="CONTACT">
     
@@ -536,7 +558,7 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
                   <div class="contact_title  wow fadeInUp animated">
                       <h1>GET IN TOUCH</h1>
                       <img src="images/shape.png" alt="">
-                     <p><?php echo base64_decode($profile['summary']); ?></p>
+                     <p>If you want to cooperate with me, please leave a message below</p>
                   </div>
               </div>
           </div>
@@ -559,18 +581,18 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
                   </div>
               </div>
               <div class="col-md-9  wow fadeInRight animated">
-                  <form class="contact-form" action="">
+                  <form enctype="multipart/form-data" class="contact-form" action="" method="post">
                       <div class="row">
                           <div class="col-md-6">
-                              <input type="text" class="form-control" id="name" placeholder="Name">
-                              <input type="email" class="form-control" id="email" placeholder="Email">
-                              <input type="text" class="form-control" id="subject" placeholder="Subject">                                
+                              <input type="text" class="form-control" name="Name" id="name" placeholder="Name" required>
+                              <input type="email" class="form-control" name="Email" id="email" placeholder="Email"required>
+                              <input type="text" class="form-control" name="Subject" id="subject" placeholder="Subject"required>                                
                           </div>
                           <div class="col-md-6">
-                              <textarea class="form-control" id="message" rows="25" cols="10" placeholder="  Message Texts..."></textarea>
-                              <button type="button" class="btn btn-default submit-btn form_submit">SEND MESSAGE</button>                                
+                              <textarea name="message" class="form-control" id="message" rows="25" cols="10" placeholder="  Message Texts..."required></textarea>
+                              <button name="send"  class="btn btn-default form_submit">SEND MESSAGE</button>                                                           
                           </div>
-                      </div>
+                      </div>               
                   </form>
               </div>
           </div>
@@ -599,10 +621,10 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
                   <a class="facebook" href="https://facebook.com/kimtiem.kim"><i class="icon-social-facebook"></i></a>
                 </li>
                 <li>
-                  <a class="twitter" href="#"><i class="icon-social-twitter"></i></a>
+                  <a class="twitter" href=""><i class="icon-social-twitter"></i></a>
                 </li>
                 <li>
-                  <a class="instagram" href="#"><i class="icon-social-instagram"></i></a>
+                  <a class="instagram" href="https://www.instagram.com/q_u_a_c/"><i class="icon-social-instagram"></i></a>
                 </li>
                 <li>
                   <a class="instagram" href="#"><i class="icon-social-linkedin"></i></a>

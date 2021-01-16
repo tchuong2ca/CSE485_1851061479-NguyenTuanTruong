@@ -52,11 +52,11 @@ if(isset($_POST['p_update'])){
 	}
 }
 
- // Counter area 
+ // Awards
 
-if(isset($_POST['count_save'])){
+if(isset($_POST['achi_save'])){
 	
-	if($mysqli->query("insert into counterarea values(
+	if($mysqli->query("insert into achievements values(
 		'',
 		'".$_SESSION['profile_session']."',
 		'".($_POST['project'])."',
@@ -71,17 +71,17 @@ if(isset($_POST['count_save'])){
 		$wer = '<p style="color:#f00;">Something wrong! please try again.</p>';
 	}
 }
-$cn = mysqli_fetch_assoc($mysqli->query("select * from counterarea where a_id = '".$_SESSION['profile_session']."'"));
+$cn = mysqli_fetch_assoc($mysqli->query("select * from achievements where a_id = '".$_SESSION['profile_session']."'"));
 if(!empty($cn['id'])){
 	$s_button = '<button name="s_update" type="submit" class="btn btn-default">Update</button>';
 	$req = '';
 }else{
-	$s_button = '<button name="count_save" type="submit" class="btn btn-default">save</button>';
+	$s_button = '<button name="achi_save" type="submit" class="btn btn-default">save</button>';
 	$req = 'required';
 }
 if(isset($_POST['s_update'])){
 	
-	if($mysqli->query("update counterarea set
+	if($mysqli->query("update achievements set
 		working = '".($_POST['project'])."',
 		done = '".($_POST['done'])."',
 		awards = '".($_POST['award'])."',
@@ -103,11 +103,11 @@ if(isset($_POST['det_save'])){
 	if($mysqli->query("insert into details values(
 		'',
 		'".$_SESSION['profile_session']."',
-		'".base64_encode($_POST['greeting'])."',
-		'".base64_encode($_POST['intro'])."',		
+		
 		'".($_POST['age'])."',
 		'".($_POST['exp'])."',
-		'".base64_encode($_POST['freelance'])."'
+		'".base64_encode($_POST['exlanguage'])."',
+		'".($_POST['select'])."'
 		
 	)")){		
 		echo "<script>alert('Save success!')</script>";
@@ -127,12 +127,10 @@ if(!empty($cn['id'])){
 if(isset($_POST['det_update'])){
 	
 	if($mysqli->query("update details set
-		greeting = '".base64_encode($_POST['greeting'])."',
-		intro = '".base64_encode($_POST['intro'])."',
-
 		age = '".($_POST['age'])."',
 		exp ='".($_POST['exp'])."',
-		freelance = '".base64_encode($_POST['freelance'])."'
+		exlanguage='".base64_encode($_POST['exlanguage'])."',
+		freelance = '".($_POST['select'])."'
 		where a_id = '".$_SESSION['profile_session']."'
 	")){
 		echo "<script>alert('Update success!')</script>";
@@ -171,25 +169,7 @@ if(!empty($_GET['content_delete_id'])){
 }
 //-----------------------------------
 
-// Add details
 
-if(isset($_POST['addetail'])){
-	if($mysqli->query("insert into details values(
-		'',
-		'".$_SESSION['profile_session']."',
-		'".base64_encode($_POST['greeting'])."',
-		'".base64_encode($_POST['intro'])."',
-		
-		'".($_POST['age'])."',
-		'".($_POST['exp'])."',
-		'".base64_encode($_POST['freelance'])."'
-	)")){
-		echo "<script>alert('Adding success!')</script>";
-		echo "<script>window.open('index.php?page=profile','_self')</script>";
-	}else{
-		$wer = '<p style="color:#f00;">Something wrong! please try again.</p>';
-	}
-}
 
 if(!empty($_GET['de_delete_id'])){
 	if($mysqli->query("delete from details where id = '".$_GET['de_delete_id']."'")){
@@ -268,7 +248,7 @@ if(!empty($_GET['ser_delete_id'])){
 				</div>
 				<div class="form-group">
 					<label>Phone number:</label>
-					<input value="<?php if(!empty($cnk['mobile'])){ echo base64_decode($cnk['mobile']); } ?>" type="text" class="form-control" placeholder="Enter Phone number" name="p_number" required>
+					<input  value="<?php if(!empty($cnk['mobile'])){ echo base64_decode($cnk['mobile']); } ?>" type="text" class="form-control" placeholder="Enter Phone number" name="p_number" required>
 				</div>
 				<div class="form-group">
 					<label>Summary:</label>
@@ -352,7 +332,7 @@ if(!empty($_GET['ser_delete_id'])){
 				  <input type="text" class="form-control" placeholder="Programming Language" name="skill" required>
 				</div>	
 				<div class="form-group">
-				  <label>Percentage:</label>
+				  <label>Proficiency index:</label>
 				  <input type="number" class="form-control" placeholder="Enter number" name="percentage" required>
 				</div>			
 				<button name="add_skill" type="submit" class="btn btn-default">Add skill</button>
@@ -382,26 +362,23 @@ if(!empty($_GET['ser_delete_id'])){
 			<form action="" method="post">
 				<p>Details</p>
 				<div class="form-group">
-				<label>Greeting:</label>
-				<input value="<?php if(!empty($det['greeting'])){ echo base64_decode($det['greeting']); } ?>" type="text" class="form-control" placeholder="enter your greeting" name="greeting" required>
-			  </div>
-				<div class="form-group">
-				  <label>Intro</label>
-				  <input value="<?php if(!empty($det['intro'])){ echo base64_decode($det['intro']); } ?>"  type="text" class="form-control" placeholder="intro" name="intro" required>
-				</div>
-				
-				<div class="form-group">
 				  <label>age</label>
-				  <input value="<?php if(!empty($det['age'])){ echo ($det['age']); } ?>"  type="number" class="form-control" placeholder="age" name="age" required>
+				  <input  value="<?php if(!empty($det['age'])){ echo ($det['age']); } ?>"  type="number" class="form-control" placeholder="age" name="age" required>
 				</div>	
 				<div class="form-group">
 				  <label>exp</label>
 				  <input value="<?php if(!empty($det['exp'])){ echo ($det['exp']); } ?>" type="number" class="form-control" placeholder="exp" name="exp" required>
-				</div>	
+				</div>
 				<div class="form-group">
-				  <label>freelance</label>
-				  <input value="<?php if(!empty($det['freelance'])){ echo base64_decode($det['freelance']); } ?>" type="text" class="form-control" placeholder="available/unavailable" name="freelance" required>
-				</div>	
+				<label>Extra Language</label>
+				<input value="<?php if(!empty($det['exlanguage'])){ echo base64_decode($det['exlanguage']); } ?>" type="text" class="form-control" name="exlanguage">
+			  </div>		
+				<label>freelance</label>
+				<select name="select" class="form-control" required>
+					<option >--select 0ne--</option>
+					<option>Available</option>
+					<option>Unavailable</option>
+				  </select>
 				<?php echo $det_button; ?>	
 			</form>
 			
@@ -420,7 +397,7 @@ if(!empty($_GET['ser_delete_id'])){
 
 			  <div class="form-group">
 				<label>Service:</label>
-				<input type="text" class="form-control" placeholder="Enter text" name="service" required>
+				<input  type="text" class="form-control" placeholder="Enter text" name="service" required>
 			  </div>	
 			  <div class="form-group">
 				<label>Description:</label>
@@ -447,15 +424,15 @@ if(!empty($_GET['ser_delete_id'])){
 	  </div>
 
 
-<!--  Counter area -->
+<!-- Achievements area -->
 
 	  <div class="col-sm-4">
 		  
 		  <form action="" method="post">
-			  <p>Counter area</p>
+			  <p>Achievements</p>
 
 			  <div class="form-group">
-				<label>project:</label>
+				<label>on going project:</label>
 				<input value="<?php if(!empty($cn['working'])){ echo ($cn['working']); } ?>" type="number" class="form-control" placeholder="number of ongoing projects" name="project" required>
 			  </div>	
 			  <div class="form-group">
@@ -467,7 +444,7 @@ if(!empty($_GET['ser_delete_id'])){
 				<input value="<?php if(!empty($cn['awards'])){ echo ($cn['awards']); } ?>" type="number" class="form-control" placeholder="Awards" name="award" required>
 			  </div>
 			  <div class="form-group">
-				<label>clients:</label>
+				<label>happy clients:</label>
 				<input value="<?php if(!empty($cn['clients'])){ echo ($cn['clients']); } ?>" type="number" class="form-control" placeholder="number of happy clients" name="client" required>
 			  </div>
 			  <?php echo $s_button; ?>			

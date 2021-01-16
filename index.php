@@ -17,13 +17,34 @@ echo '<div class="w3-content" style="max-width:2000px;margin-top:46px">';
 		}else{
 			echo "<script>window.open('index.php','_self')</script>";
 		}	
-	}elseif($page == 'signup'){
+	}
+	elseif($page == 'signup'){
 		if(!isset($_SESSION['profile_session'])){
 			include("template/signup.php");
 		}else{
 			echo "<script>window.open('index.php','_self')</script>";
 		}
-	}elseif($page == 'profile'){
+	}
+	elseif($page == 'forgot'){
+		if(!isset($_SESSION['profile_session'])){
+			include("template/forgot.php");
+		}
+	}
+	elseif($page == 'changepassword'){
+		if(!isset($_SESSION['profile_session'])){
+			include("template/changepassword.php");
+		}else{
+			echo "<script>window.open('index.php','_self')</script>";
+		}	
+	}
+	elseif($page == 'sendMail'){
+		if(!isset($_SESSION['profile_session'])){
+			include("sendMail.php");
+		}else{
+			echo "<script>window.open('index.php','_self')</script>";
+		}
+	}
+	elseif($page == 'profile'){
 		if(!isset($_SESSION['profile_session'])){
 			echo "<script>window.open('index.php','_self')</script>";
 		}else{
@@ -32,7 +53,11 @@ echo '<div class="w3-content" style="max-width:2000px;margin-top:46px">';
 	}
 	elseif($page == 'frontend/index.php'){
 		include("frontend/index.php");
-	}elseif($page == 'logout'){
+	}
+	elseif($page == 'template/delete.php'){
+		include("template/delete.php");
+	}
+	elseif($page == 'logout'){
 		unset($_SESSION['profile_session']);
 		echo "<script>window.open('index.php','_self')</script>";
 	}else{
@@ -40,7 +65,6 @@ echo '<div class="w3-content" style="max-width:2000px;margin-top:46px">';
 		
 	}	
 echo '</div>';	
-	include("include/footer.php");
 	include("include/js.php");
 echo '</body></html>';	
 ?>

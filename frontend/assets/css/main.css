@@ -1084,7 +1084,7 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   color: #fff;
   padding-top: 13px;
   padding-bottom: 10px;
-  transition: all 1s;	
+  
   }
   
   

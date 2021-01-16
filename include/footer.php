@@ -1,9 +1,22 @@
-<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
-  <a href="https://www.facebook.com/kimtiem.kim"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
-  <i class="fa fa-instagram w3-hover-opacity"></i>
-  <i class="fa fa-snapchat w3-hover-opacity"></i>
-  <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-  <i class="fa fa-twitter w3-hover-opacity"></i>
-  <i class="fa fa-linkedin w3-hover-opacity"></i>
-  <p class="w3-medium">Powered by <a href="https://www.facebook.com/kimtiem.kim" target="_blank">me</a></p>
-</footer>
+<link rel="stylesheet" href="include/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="include/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="include/assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="include/assets/css/Fixed-navbar-starting-with-transparency-1.css">
+    <link rel="stylesheet" href="include/assets/css/Fixed-navbar-starting-with-transparency.css">
+    <link rel="stylesheet" href="include/assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="include/assets/css/styles.css">
+    <link rel="stylesheet" href="include/assets/css/Table-With-Search-1.css">
+    <link rel="stylesheet" href="include/assets/css/Table-With-Search.css">
+<div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Company Name © 2017</p>
+        </footer>
+    </div>
