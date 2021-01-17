@@ -49,17 +49,17 @@ if(isset($_POST["delete"])) {
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>Trang xóa thành viên</h1>
+                        <h1>Delete Account</h1>
                     </div>
                     <form method="post">
                         <div class="container">
                           
                             <div class="form-group"><label class="text-secondary">Password</label>
                             <input name= "password" id="password" class="form-control" type="password" required="" placeholder="Enter Password"></div>
-                            <p>Bạn thật sự muốn xóa thành viên này?</p><br>
+                            <p>Do you really want to delete this account ?</p><br>
                             <p>
-                                <input name="delete" type="submit" value="Xóa" class="btn btn-warning">
-                                <a href="index.php" class="btn btn-default">Thôi</a>
+                                <input name="delete" type="submit" value="Delete" class="btn btn-warning">
+                                <a href="index.php" class="btn btn-default">Cancel</a>
                             </p>
                         </div>
                     </form>

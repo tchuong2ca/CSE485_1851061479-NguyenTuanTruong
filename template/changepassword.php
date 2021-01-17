@@ -23,12 +23,10 @@ if(isset($_POST['change']))
 	}
 }
 ?>
-
-
     <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
-            <h3 style="font-size:23px;" class="text-center text-secondary mt-5 mb-3">Forgot Password</h3>
+            <h3 style="font-size:23px;" class="text-center text-secondary mt-5 mb-3">Change Password</h3>
             <form method="post"class="forgot border rounded w-100 mb-5 mx-auto px-3 pt-3 bg-light">
             <?php if(!empty($wer)){ echo $wer; }?>
                       
@@ -41,8 +39,6 @@ if(isset($_POST['change']))
         </div>
     </div>
 </div>
-
-
     <script src="include/assets/js/jquery.min.js"></script>
     <script src="include/assets/bootstrap/js/bootstrap.min.js"></script>
 

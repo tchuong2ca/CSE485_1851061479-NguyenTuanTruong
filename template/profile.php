@@ -1,5 +1,4 @@
 <?php 
-
 // Profile
 error_reporting(0);
 if(isset($_POST['save'])){
@@ -169,8 +168,6 @@ if(!empty($_GET['content_delete_id'])){
 }
 //-----------------------------------
 
-
-
 if(!empty($_GET['de_delete_id'])){
 	if($mysqli->query("delete from details where id = '".$_GET['de_delete_id']."'")){
 		echo "<script>alert('Delete success!')</script>";
@@ -181,7 +178,6 @@ if(!empty($_GET['de_delete_id'])){
 }
 
 // Add skills
-
 if(isset($_POST['add_skill'])){
 	if($mysqli->query("insert skill values(
 		
@@ -203,7 +199,6 @@ if(!empty($_GET['skill_delete_id'])){
 		$wer = '<p style="color:#f00;">Something wrong! please try again.</p>';
 	}
 }
-
 // add services
 
 if(isset($_POST['add_ser'])){
@@ -316,11 +311,7 @@ if(!empty($_GET['ser_delete_id'])){
 			</table>
 		</div>
 
-
-
 <!-- Programming Skills -->
-
-
 
 		<div class="col-sm-4">
 		  
@@ -355,7 +346,6 @@ if(!empty($_GET['ser_delete_id'])){
 			</table>
 		</div>
 
-
 <!-- details section -->
 		<div class="col-sm-4">
 		  
@@ -384,10 +374,6 @@ if(!empty($_GET['ser_delete_id'])){
 			
 			
 		</div>
-
-
-		
-
 		
 <!-- services section -->
 		<div class="col-sm-4">
@@ -423,14 +409,11 @@ if(!empty($_GET['ser_delete_id'])){
 		  </table>
 	  </div>
 
-
 <!-- Achievements area -->
 
-	  <div class="col-sm-4">
-		  
+	  <div class="col-sm-4">		  
 		  <form action="" method="post">
 			  <p>Achievements</p>
-
 			  <div class="form-group">
 				<label>on going project:</label>
 				<input value="<?php if(!empty($cn['working'])){ echo ($cn['working']); } ?>" type="number" class="form-control" placeholder="number of ongoing projects" name="project" required>
@@ -447,12 +430,8 @@ if(!empty($_GET['ser_delete_id'])){
 				<label>happy clients:</label>
 				<input value="<?php if(!empty($cn['clients'])){ echo ($cn['clients']); } ?>" type="number" class="form-control" placeholder="number of happy clients" name="client" required>
 			  </div>
-			  <?php echo $s_button; ?>			
-			  
+			  <?php echo $s_button; ?>						  
 		  </form>
-		  
 	  </div>
-
-
 	</div>
 </div>
