@@ -15,7 +15,7 @@ if(isset($_POST['signup']))
 	{
 		if($_POST['password']==$_POST['confirm']){
 		if($mysqli->query("insert into registration values(
-			'',
+			
 			'".base64_encode($_POST['name'])."',
 			'".base64_encode($_POST['email'])."',
 			'".base64_encode($_POST['password'])."',

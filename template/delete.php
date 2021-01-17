@@ -1,22 +1,20 @@
 <?php
  error_reporting(0);
- 
- $mai=base64_decode($_GET['user_id']);
+ $mai=($_GET['user_id']);
 if(isset($_POST["delete"])) {   
-    $check = mysqli_fetch_assoc($mysqli->query("select * from registration where email = '".base64_encode($mai)."' 
+    $check = mysqli_fetch_assoc($mysqli->query("select * from registration where email = '$mai' 
  and password = '".base64_encode($_POST['password'])."'"));
  if($check['password'] == base64_encode( $_POST['password'])){
-  
-    $mysqli->query("delete from contact where email= '$mai'");
-    $mysqli->query("delete from services where email= '".base64_encode($mai)."'");
-    $mysqli->query("delete from skill where email= '".base64_encode($mai)."'");
-    $mysqli->query("delete from prolife where email= '".base64_encode($mai)."'");
-    $mysqli->query("delete from details where email= '".base64_encode($mai)."'");
-    $mysqli->query("delete from content where email= '".base64_encode($mai)."'");
-    $mysqli->query("delete from achievements where email= '".base64_encode($mai)."'");
-    $mysqli->query("delete from registration where email= '".base64_encode($mai)."'");
-    header('location: index.php');
- }else{
+    $mysqli->query("delete from services where a_id= '$mai'");
+    $mysqli->query("delete from skill where a_id= '$mai'");
+    $mysqli->query("delete from profile where a_id= '$mai'");
+    $mysqli->query("delete from details where a_id= '$mai'");
+    $mysqli->query("delete from content where a_id= '$mai'");
+    $mysqli->query("delete from achievements where a_id= '$mai'");
+    $mysqli->query("delete from registration where email= '$mai'");
+    header('location: index.php?page=logout');
+    }
+ else{
      $errors[] = 'Incorrect password. ';
         }if (!empty($errors)) {                     
             $errorstring = "Error! <br /> The following error(s) occurred:<br>";
@@ -27,7 +25,7 @@ if(isset($_POST["delete"])) {
             $errorstring .= "Please try again.<br>";
             echo "<p class=' text-center col-sm-2' style='color:red'>$errorstring</p>";
             }        
-} 
+        }
 ?>
 <!DOCTYPE html>
 <html lang="en">

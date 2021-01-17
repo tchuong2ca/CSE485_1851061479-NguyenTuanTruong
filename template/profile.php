@@ -5,7 +5,7 @@ error_reporting(0);
 if(isset($_POST['save'])){
 	include("template/profile_image.php");	
 	if($mysqli->query("insert into profile values(
-		'',
+		
 		'".$_SESSION['profile_session']."',
 		'".base64_encode($_POST['j_title'])."',
 		'".base64_encode($_POST['address'])."',
@@ -57,7 +57,7 @@ if(isset($_POST['p_update'])){
 if(isset($_POST['achi_save'])){
 	
 	if($mysqli->query("insert into achievements values(
-		'',
+		
 		'".$_SESSION['profile_session']."',
 		'".($_POST['project'])."',
 		'".($_POST['done'])."',
@@ -101,7 +101,7 @@ if(isset($_POST['s_update'])){
 if(isset($_POST['det_save'])){
 	
 	if($mysqli->query("insert into details values(
-		'',
+	
 		'".$_SESSION['profile_session']."',
 		
 		'".($_POST['age'])."',
@@ -146,7 +146,7 @@ if(isset($_POST['det_update'])){
 
 if(isset($_POST['add'])){
 	if($mysqli->query("insert into content values(
-		'',
+	
 		'".$_SESSION['profile_session']."',
 		'".$_POST['type']."',
 		'".base64_encode($_POST['w_j_title'])."',
@@ -184,10 +184,10 @@ if(!empty($_GET['de_delete_id'])){
 
 if(isset($_POST['add_skill'])){
 	if($mysqli->query("insert skill values(
-		'',
+		
 		'".$_SESSION['profile_session']."',
 		'".base64_encode($_POST['skill'])."',
-		'".($_POST['percentage'])."'
+		'".($_POST['proIndex'])."'
 	)")){
 		echo "<script>alert('Adding success!')</script>";
 		echo "<script>window.open('index.php?page=profile','_self')</script>";
@@ -208,7 +208,7 @@ if(!empty($_GET['skill_delete_id'])){
 
 if(isset($_POST['add_ser'])){
 	if($mysqli->query("insert services values(
-		'',
+	
 		'".$_SESSION['profile_session']."',
 		'".base64_encode($_POST['service'])."',
 		'".base64_encode($_POST['describe'])."'
@@ -333,7 +333,7 @@ if(!empty($_GET['ser_delete_id'])){
 				</div>	
 				<div class="form-group">
 				  <label>Proficiency index:</label>
-				  <input type="number" class="form-control" placeholder="Enter number" name="percentage" required>
+				  <input type="number" class="form-control" placeholder="Enter number" name="proIndex" required>
 				</div>			
 				<button name="add_skill" type="submit" class="btn btn-default">Add skill</button>
 			</form>
@@ -345,7 +345,7 @@ if(!empty($_GET['ser_delete_id'])){
 				  <tr>
 					<td>
 						<?php echo base64_decode($row['content']); ?> <hr style="margin:0px;border:solid 1px #eee;"/>
-						<?php echo ($row['percentage']);?>
+						<?php echo ($row['proIndex']);?>
 					</td>
 					<td>
 						<a href="index.php?page=profile&skill_delete_id=<?php echo $row['id']; ?>">delete</a>

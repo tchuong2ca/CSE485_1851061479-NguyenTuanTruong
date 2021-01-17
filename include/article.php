@@ -22,7 +22,7 @@
                         <td colspan="8"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
                     </tr>
 <?php
-$get_cv = $mysqli->query("select * from registration order by id desc");
+$get_cv = $mysqli->query("select * from registration ");
 while($row = mysqli_fetch_assoc($get_cv)){
 ?>	
       <tr>
@@ -31,7 +31,7 @@ while($row = mysqli_fetch_assoc($get_cv)){
         <td><?php echo ($row['data']); ?></td>
         <td>
 			<a href="index.php?page=frontend/index.php&user_id=<?php echo $row['email']; ?>" title="ViewCV"><i class="fas fa-eye"></i></a>&emsp; &emsp;
-            <a href="index.php?page=template/delete.php&user_id=<?php echo $row['email']; ?>"><i class="fas fa-user-slash" style="color: orange;"></i></a>
+            <a href="index.php?page=template/delete.php&user_id=<?php echo $row['email']; ?>"title="Delete"><i class="fas fa-user-slash" style="color: orange;"></i></a>
 		</td>
       </tr>
 <?php } ?>

@@ -265,8 +265,8 @@ $skill = mysqli_fetch_assoc($mysqli->query("select * from skill where a_id = '".
                     <li>
                     <div  style="width:750px; padding-left:20px;">
         
-         <h4><?php echo base64_decode($ski_row['content']); ?> &ensp; <?php echo ($ski_row['percentage']); ?>%</h4>
-        <div class="<?php echo base64_decode($ski_row['content']); ?>"><span class = "skillbar" style="width:<?php echo ($ski_row['percentage']); ?>%"></span></div>    
+         <h4><?php echo base64_decode($ski_row['content']); ?> &ensp; <?php echo ($ski_row['proIndex']); ?>%</h4>
+        <div class="<?php echo base64_decode($ski_row['content']); ?>"><span class = "skillbar" style="width:<?php echo ($ski_row['proIndex']); ?>%"></span></div>    
         </div>
                     </li>
    
