@@ -22,8 +22,8 @@
                         <td colspan="8"><i class="fa fa-warning"></i>&nbsp; No Result !!!</td>
                     </tr>
 <?php
-$get_cv = $mysqli->query("select * from registration ");
-while($row = mysqli_fetch_assoc($get_cv)){
+$get_cv = $mysqli->query("select * from registration ") or die($mysqli->error);
+while($row = $get_cv->fetch_assoc()){
 ?>	
       <tr>
         <td><?php echo base64_decode($row['name']); ?></td>

@@ -649,19 +649,7 @@ if(isset($_POST['send']))
     </a>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    
-    <script src="frontend/assets/js/jquery-min.js"></script>
-    <script src="frontend/assets/js/popper.min.js"></script>
-    <script src="frontend/assets/js/bootstrap.min.js"></script>
-    <script src="frontend/assets/js/jquery.mixitup.js"></script>
-    <script src="frontend/assets/js/jquery.counterup.min.js"></script>
-    <script src="frontend/assets/js/waypoints.min.js"></script>
-    <script src="frontend/assets/js/wow.js"></script>
-    <script src="frontend/assets/js/jquery.nav.js"></script>
-    <script src="frontend/assets/js/jquery.easing.min.js"></script>  
-    <script src="frontend/assets/js/nivo-lightbox.js"></script>
-    <script src="frontend/assets/js/jquery.slicknav.js"></script>
-    <script src="frontend/assets/js/main.js"></script>
+
     <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));

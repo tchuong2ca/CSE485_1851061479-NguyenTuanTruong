@@ -12,7 +12,7 @@ if(isset($_POST["delete"])) {
     $mysqli->query("delete from content where a_id= '$mai'");
     $mysqli->query("delete from achievements where a_id= '$mai'");
     $mysqli->query("delete from registration where email= '$mai'");
-    header('location: index.php?page=logout');
+   echo "<script>window.open('index.php?page=logout','_self')</script>";
     }
  else{
      $errors[] = 'Incorrect password. ';

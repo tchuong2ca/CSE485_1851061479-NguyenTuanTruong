@@ -1,5 +1,6 @@
 <?php
 include("config/config.php");
+// error_reporting(0);
 $page = '';
 if(isset($_GET['page'])){
 	$page = $_GET['page'];
@@ -53,6 +54,9 @@ echo '<div class="w3-content" style="max-width:2000px;margin-top:46px">';
 	}
 	elseif($page == 'frontend/index.php'){
 		include("frontend/index.php");
+	}
+	elseif($page == 'frontend/indexNoJs.php'){
+		include("frontend/indexNoJs.php");
 	}
 	elseif($page == 'template/delete.php'){
 		include("template/delete.php");
